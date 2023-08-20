@@ -44,9 +44,7 @@ function compareCode(row1, row2) {
 
 function handleEvent(event) {
     if (event.key == "Enter") {
-        console.log("Enter is pressed");
         const form = document.getElementById("add_block");
-        console.log("Enter is pressed");
         const index = [...form].indexOf(event.target);
         form.elements[index + 1].focus();
     }
@@ -57,7 +55,7 @@ function is_number(word) {
     if (isempty(word)) {
         return false;
     } else if (word.match(regex)) {
-        alert(word + ' (in MC/Unit field) is not a valid number.');
+        alert('"' + word + '" (in MC/Unit field) is not a valid number.');
         return false;
     } else {
         return true;
