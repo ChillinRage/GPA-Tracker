@@ -1,0 +1,169 @@
+h1 {
+    text-align: center;
+    font-size: 45px;
+    color: azure;
+}
+
+.record_table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    background-color: azure;
+    font-size: 25px;
+}
+
+th {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-decoration: underline;
+}
+
+td {
+    padding-bottom: 1em;
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: center;
+}
+
+body {
+    background-image: url(bg_watch.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#rawGrades {
+    font-size: 20px;
+    padding: 1%;
+    margin: 1%;
+}
+
+#withSU {
+    font-size: 20px;
+    padding: 1%;
+    margin: 1%;
+}
+
+.row1_block {
+    text-align: center;
+    display: flex;
+}
+
+.new_module_label {
+    padding-left: 15%;
+    text-decoration: underline solid;
+    font-size: 30px;
+}
+
+.add_block {
+    display: inline-block;
+    margin: auto;
+    width: 40%;
+    background-color: antiquewhite;
+    font-size: 25px;
+    padding: 15px;
+}
+
+.cap_block {
+    display: inline-block;
+    margin: auto;
+    background-color: rgb(103, 243, 145);
+    font-size: 40px;
+    padding: 1%;
+}
+
+.add_label {
+    width: 30%;
+    float: left;
+    text-align: right;
+    padding: 5px;
+}
+
+input {
+    float: left;
+    font-size: 18px;
+    padding:5px;
+}
+
+select {
+    font-size: 18px;
+    float: left;
+    padding:5px;
+}
+
+br {
+    clear: both;
+}
+
+.delete_btn {
+    font-size: 20px;
+    float: right;
+}
+
+#add_btn {
+    font-size: 24px;
+    float: right;
+}
+
+.cap_label {
+    text-decoration: underline;
+}
+
+/* On ipad */
+@media (min-device-width:768px) and (max-device-width: 1024px) {
+
+    html {
+        height: 100%;
+    }
+
+    .add_block {
+        width: 50%;
+        font-size: 24px;
+    }
+
+    .add_label {
+        width: 20%;
+    }
+
+    .cap_block {
+        padding: 2%;
+    }
+}
+
+/* On smaller devices */
+@media (min-device-width:300px) and (max-device-width: 700px) {
+
+    html {
+        height: 100%;
+    }
+
+    .record_table {
+        width: 95%;
+        font-size: 30px;
+    }
+
+    th {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    td {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .add_block {
+        width: 52%;
+        font-size: 20px;
+    }
+
+    .add_label {
+        width: 20%;
+    }
+
+    .cap_block {
+        padding: 2%;
+    }
+}
