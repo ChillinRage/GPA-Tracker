@@ -11,12 +11,17 @@
 
 <body>
     <h1>Student's Pathetic Record</h1>
+    <div style="text-align:center;">
+        <button id="rawGrades" onclick="displayRaw(DEFAULT)">Raw Grades</button>
+        <button id="withSU" onclick="displaySU(DEFAULT)">With S/U</button><br>
+    </div>
+
     <table class="record_table" id="table">
         <tr>
             <th>Year</th>
             <th>Semester</th>
-            <th>Module</th>
-            <th>Grade</th>
+            <th onclick="display(compareCode)">Module</th>
+            <th onclick="display(compareGrade)">Grade</th>
             <th>MC</th>
             <th>Remark</th>
         </tr>
@@ -74,7 +79,7 @@
                 <option value="yes">Yes</option>
             </select>
 
-            <button onclick="add_row()" type="button" style="font-size: 24px;">Add</button>
+            <button id="add_btn" onclick="add_row()" type="button" style="font-size: 24px;">Add</button>
         </form>
         <br>
         <div class="cap_block">
