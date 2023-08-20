@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="with-device-width">
+    <title>Academic Record</title>
+    <link rel='stylesheet' href='Sub_2.css'>
+    <link rel="icon" type="img/png" href="bongo_cat.jpg">
+</head>
+
+<body>
+    <h1>Student's Pathetic Record</h1>
+    <table class="record_table" id="table">
+        <tr>
+            <th>Year</th>
+            <th>Semester</th>
+            <th>Module</th>
+            <th>Grade</th>
+            <th>MC</th>
+            <th>Remark</th>
+        </tr>
+    </table>
+    <br>
+
+    <section class="row1_block">
+
+        <form class="add_block" id="add_block">
+            <label class="new_module_label"><b>New Module</b></label>
+            <button class='delete_btn' onclick="delete_row()" type="button">Remove <br> a module</button><br>
+            
+            <label class="add_label">Year : </label>
+            <!--<input type="text" id="year" onkeydown="handleEvent(event)" /><br>-->
+            <select id="year">
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+            </select><br>
+
+            <label class="add_label">Semester : </label>
+            <select id="semester">
+                <option value=1>1</option>
+                <option value=2>2</option>
+            </select><br>
+
+            <label class="add_label">Module : </label>
+            <input type="text" id="module" onkeydown="handleEvent(event)" /><br>
+
+            <label class="add_label">Grade : </label>
+            <select id="grade">
+                <option value="A+">A+</option>
+                <option value="A">A</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="B-">B-</option>
+                <option value="C+">C+</option>
+                <option value="C">C</option>
+                <option value="D+">D+</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+            </select><br>
+
+            <label class="add_label">MC/Units : </label>
+            <input type="text" id="mc" onkeydown="handleEvent(event)" /><br>
+
+            <label class="add_label">Type : </label>
+            <input type="text" id="type" onkeydown="handleEvent(event)" /><br>
+
+            <label class="add_label">S/U : </label>
+            <select id="SU">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+            </select>
+
+            <button onclick="add_row()" type="button" style="font-size: 24px;">Add</button>
+        </form>
+        <br>
+        <div class="cap_block">
+            <label>GPA</label><br>
+            <label class="cap_label" id="cap_label">0.00</label>
+        </div>
+    </section>
+    <br>
+
+    <script src="Script_2.js"></script>
+</body>
+
+</html>
