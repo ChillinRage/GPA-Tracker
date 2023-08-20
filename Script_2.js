@@ -1,5 +1,6 @@
 // SORTING FUNCTIONS
 const DEFAULT = (x,y) => 0;
+const FAIL = ["D+", "D", "F"]
 
 /* true: x bigger than y
  * false: x equal to or less than y 
@@ -7,6 +8,18 @@ const DEFAULT = (x,y) => 0;
 function compareGrade(row1, row2) {
     let x = row1[3];
     let y = row2[3];
+
+    if (!raw && (row1[6] || row2[6])) { // S and U is flushed to bottom
+        if (row1[6] && row2[6]) { // both SU
+            return FAIL.includes(row1[3])
+                ? -1
+                : 1;
+        } 
+
+        return row1[6]
+            ? 1
+            : -1;
+    }
 
     if (x[0] != y[0] || x === y) { // different letter grade or exactly equal
         return x[0] < y[0]
@@ -113,8 +126,7 @@ function insert_row(data) {
     remark.innerHTML = data[5];
 
     if (!raw && data[6]) { // Change grade to S/U if yes
-        const fail = ["D+", "D", "F"];
-        if (fail.includes(data[3])) {grade.innerHTML = "U";}
+        if (FAIL.includes(data[3])) {grade.innerHTML = "U";}
         else {grade.innerHTML = "S";}
     }
 }
@@ -186,9 +198,9 @@ function update_cap() {
     const data = get_data();
     let total_mc = 0;
     let points = 0;
-    console.log(data);
+
     for (const row of data) {
-        if (JSON.parse(row[6])) continue; //if SU, skip
+        if (!raw && JSON.parse(row[6])) continue; //if SU, skip
         total_mc += JSON.parse(row[4]);
         switch (row[3]) {
             case 'A+':
