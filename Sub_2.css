@@ -34,6 +34,18 @@ body {
     background-position: center;
 }
 
+#rawGrades {
+    font-size: 20px;
+    padding: 1%;
+    margin: 1%;
+}
+
+#withSU {
+    font-size: 20px;
+    padding: 1%;
+    margin: 1%;
+}
+
 .row1_block {
     text-align: center;
     display: flex;
@@ -85,14 +97,13 @@ br {
     clear: both;
 }
 
-button {
-    float: right;
-    font-size: 20px;
-    margin-left: 15px;
-}
-
 .delete_btn {
     font-size: 20px;
+    float: right;
+}
+
+#add_btn {
+    font-size: 24px;
     float: right;
 }
 
