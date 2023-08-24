@@ -1,6 +1,6 @@
 // SORTING FUNCTIONS
 const DEFAULT = (x,y) => 0;
-const FAIL = ["D+", "D", "F"]
+const FAIL = ["D+", "D", "F"];
 
 /* true: x bigger than y
  * false: x equal to or less than y 
@@ -141,6 +141,7 @@ function add_row() {
     if (is_module(mod) && is_number(mc) && !isempty(type)) {
         const arr = [year, sem, mod, grade, mc, type, SU];
         insert_row(arr);
+        alert("calling add function");
         add_to_storage(arr);
 
         document.getElementById('year').value = 1;
