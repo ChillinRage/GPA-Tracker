@@ -141,7 +141,6 @@ function add_row() {
     if (is_module(mod) && is_number(mc) && !isempty(type)) {
         const arr = [year, sem, mod, grade, mc, type, SU];
         insert_row(arr);
-        alert("calling add function");
         add_to_storage(arr);
 
         document.getElementById('year').value = 1;
@@ -157,11 +156,12 @@ function add_row() {
 }
 
 function add_to_storage(details) {
-    alert("adding");
+    alert(window.localStorage.length);
     try{
     const key = window.localStorage.length + 1;
     window.localStorage.setItem(key, JSON.stringify(details));
-    } catch(err) {alert(err.message);}
+    alert("added success");
+    } catch(err) {alert("error");}
 }
 
 function delete_row() {
@@ -183,7 +183,6 @@ function delete_row() {
 
 function delete_from_storage(mod) {
     const storage = window.localStorage;
-    alert("START");
     for (let i = 1; i < storage.length + 1; i++) {
         var temp = JSON.parse(storage.getItem(i));
         if (temp[2] === mod) {
@@ -192,7 +191,6 @@ function delete_from_storage(mod) {
             return i - 1;
         }
     }
-    alert("END");
     return -1;
 }
 
