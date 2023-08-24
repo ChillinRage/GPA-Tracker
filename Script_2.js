@@ -120,7 +120,7 @@ function insert_row(data) {
     sem.innerHTML = data[1];
     mod.innerHTML = data[2];
     grade.innerHTML = data[3];
-    mc.innerHTML = JSON.parse(data[4]);
+    mc.innerHTML = parseInt(data[4]);
     remark.innerHTML = data[5];
 
     if (!raw && data[6]) { // Change grade to S/U if yes
