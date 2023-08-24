@@ -51,10 +51,10 @@ function handleEvent(event) {
 }
 
 function is_number(word) {
-    var regex = /^[a-zA-Z]+$/;
+    var regex = /^[1-9][0-9]*$/;
     if (isempty(word)) {
         return false;
-    } else if (word.match(regex)) {
+    } else if (!word.match(regex)) {
         alert('"' + word + '" (in MC/Unit field) is not a valid number.');
         return false;
     } else {
