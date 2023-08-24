@@ -179,7 +179,7 @@ function delete_row() {
 
 function delete_from_storage(mod) {
     const storage = window.localStorage;
-
+    alert("START");
     for (let i = 1; i < storage.length + 1; i++) {
         var temp = JSON.parse(storage.getItem(i));
         if (temp[2] === mod) {
@@ -188,7 +188,7 @@ function delete_from_storage(mod) {
             return i - 1;
         }
     }
-
+    alert("END");
     return -1;
 }
 
