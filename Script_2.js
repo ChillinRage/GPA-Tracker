@@ -51,7 +51,7 @@ function handleEvent(event) {
 }
 
 function is_number(word) {
-    var regex = /^[1-9][0-9]*$/;
+    var regex = /^[0-9]+$/;
     if (isempty(word)) {
         return false;
     } else if (!word.match(regex)) {
@@ -120,7 +120,7 @@ function insert_row(data) {
     sem.innerHTML = data[1];
     mod.innerHTML = data[2];
     grade.innerHTML = data[3];
-    mc.innerHTML = data[4];
+    mc.innerHTML = JSON.parse(data[4]);
     remark.innerHTML = data[5];
 
     if (!raw && data[6]) { // Change grade to S/U if yes
