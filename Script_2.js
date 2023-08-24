@@ -157,7 +157,7 @@ function add_row() {
 
 function add_to_storage(details) {
     try{
-    alert(window.localStorage.getItem(1));
+    alert(window.localStorage.getItem(2));
     const key = window.localStorage.length + 1;
     window.localStorage.setItem(key, JSON.stringify(details));
     alert("added success");
