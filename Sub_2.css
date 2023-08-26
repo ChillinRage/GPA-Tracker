@@ -60,7 +60,7 @@ body {
 .add_block {
     display: inline-block;
     margin: auto;
-    width: 42%;
+    width: 35%;
     background-color: antiquewhite;
     font-size: 25px;
     padding: 15px;
@@ -124,7 +124,7 @@ br {
     }
 
     .add_label {
-        width: 20%;
+        width: 23%;
     }
 
     .cap_block {
