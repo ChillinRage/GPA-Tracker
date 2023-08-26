@@ -1,5 +1,3 @@
-// SORTING FUNCTIONS
-const DEFAULT = (x,y) => 0;
 const FAIL = ["D+", "D", "F"];
 
 /* true: x bigger than y
@@ -12,8 +10,8 @@ function compareGrade(row1, row2) {
     if (!raw && (row1[6] || row2[6])) { // S and U is flushed to bottom
         if (row1[6] && row2[6]) { // both SU
             return FAIL.includes(row1[3])
-                ? -1
-                : 1;
+                ? 1
+                : -1;
         } 
 
         return row1[6]
@@ -31,6 +29,7 @@ function compareGrade(row1, row2) {
         : 1;
 }
 
+// Sort by lexicographical order
 function compareCode(row1, row2) {
     let x = row1[2];
     let y = row2[2];
@@ -40,15 +39,20 @@ function compareCode(row1, row2) {
         : -1;
 }
 
-/* ================================================================ */
+// sort by year and sem
+const DEFAULT = (row1, row2) => {
+    return row1[0] < row2[0] // lower year on top
+           ? -1
+           : row1[0] > row2[0]
+             ? 1
+             : row1[1] < row2[1] // lower sem on top
+               ? -1
+               : row1[1] > row2[1]
+                 ? 1
+                 : compareCode(row1, row2); // equal year and sem
+};
 
-function handleEvent(event) {
-    if (event.key == "Enter") {
-        const form = document.getElementById("add_block");
-        const index = [...form].indexOf(event.target);
-        form.elements[index + 1].focus();
-    }
-}
+/* ======================== Checkers =============================== */
 
 function is_number(word) {
     var regex = /^[0-9]+$/;
@@ -73,7 +77,6 @@ function is_module(word) {
 
         return valid
     }
-
 }
 
 function isempty(word) {
@@ -83,27 +86,47 @@ function isempty(word) {
 
     return word === '';
 }
+/* ------------------------------------------------------------------- */
 
-function get_data() {
-    const storage = window.localStorage;
-    const len = storage.length + 1;  // 1-indexed
-    const data = [];
-
-    for (let i = 1; i < len; i++) {
-        var temp = storage.getItem(i.toString());
-        data.push(JSON.parse(temp));
+function handleEvent(event) {
+    if (event.key == "Enter") {
+        const form = document.getElementById("add_block");
+        const index = [...form].indexOf(event.target);
+        form.elements[index + 1].focus();
     }
-
-    return data;
 }
 
 function clear_table() {
     const table = document.getElementById('table');
-    const rowLength = table.rows.length - 1;
+    const rowLength = table.rows.length - 1; // -1 for header row
 
     for (let i = 0; i < rowLength; i++) {
         table.deleteRow(1);
     }
+}
+
+function reset_form() {
+    document.getElementById('year').value = 1;
+    document.getElementById('semester').value = 1;
+    document.getElementById('module').value = '';
+    document.getElementById('grade').value = "A+";
+    document.getElementById('mc').value = '';
+    document.getElementById('type').value = '';
+    document.getElementById('SU').value = 'no';
+}
+
+function get_data() {
+    const storage = window.localStorage,
+          len = storage.length,
+          data = [],
+          keys = Object.keys(storage);
+
+    for (let i = 0; i < len; i++) {
+        var temp = storage.getItem(keys[i]);
+        data.push(JSON.parse(temp));
+    }
+
+    return data;
 }
 
 function insert_row(data) {
@@ -140,28 +163,25 @@ function add_row() {
 
     if (is_module(mod) && is_number(mc) && !isempty(type)) {
         const arr = [year, sem, mod, grade, mc, type, SU];
-        insert_row(arr);
-        add_to_storage(arr);
+        if (!add_to_storage(arr)) {
+            return;
+        }
 
-        document.getElementById('year').value = 1;
-        document.getElementById('semester').value = 1;
-        document.getElementById('module').value = '';
-        document.getElementById('grade').value = "A+";
-        document.getElementById('mc').value = '';
-        document.getElementById('type').value = '';
-        document.getElementById('SU').value = 'no';
-
+        display();
+        reset_form();
         update_cap();
     }
 }
 
 function add_to_storage(details) {
-    try{
-    alert(window.localStorage.getItem(2));
-    const key = window.localStorage.length + 1;
-    window.localStorage.setItem(key, JSON.stringify(details));
-    alert("added success");
-    } catch(err) {alert("error");}
+    const storage = window.localStorage;
+    if (storage.getItem(details[2]) !== null) {
+        alert("Course already exist. Remove existing one before adding it.");
+        return false;
+    }
+
+    storage.setItem(details[2], JSON.stringify(details));
+    return true;
 }
 
 function delete_row() {
@@ -169,13 +189,12 @@ function delete_row() {
     if (mod === '') {
         alert('Invalid/Empty input');
     } else {
-        const index = delete_from_storage(mod); //delete and get row of module
-        if (index === -1) {
+        const exist = delete_from_storage(mod); //delete and get row of module
+        if (!exist) {
             alert(mod + ' is not found.');
         } else {
-            var table = document.getElementById("table");
-            table.deleteRow(index + 1);
             alert(mod + ' has been removed.');
+            display();
             update_cap();
         }
     }
@@ -183,15 +202,12 @@ function delete_row() {
 
 function delete_from_storage(mod) {
     const storage = window.localStorage;
-    for (let i = 1; i < storage.length + 1; i++) {
-        var temp = JSON.parse(storage.getItem(i));
-        if (temp[2] === mod) {
-            storage.removeItem(i);
-            console.log(temp);
-            return i - 1;
-        }
+    if (storage.getItem(mod) !== null) {
+        storage.removeItem(mod);
+        return true;
     }
-    return -1;
+
+    return false;
 }
 
 function update_cap() {
